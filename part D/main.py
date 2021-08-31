@@ -1,5 +1,3 @@
-from PIL import Image
-import pickle
 from controller import Controller
 
 
@@ -15,4 +13,5 @@ def main(pls_file_path):
     controller.run()
 
 
-main("../resources/play_list.pls")
+if __name__ == '__main__':
+    main("../resource/play_list.pls")
