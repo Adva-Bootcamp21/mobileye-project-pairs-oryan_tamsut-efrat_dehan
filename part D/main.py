@@ -1,16 +1,18 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from PIL import Image
+import pickle
+from controller import Controller
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def main(pls_file_path):
+    images_lst = []
+    main_path = pls_file_path.replace(pls_file_path.split("/")[-1], "")
+    with open(pls_file_path) as pls_file:
+        images_paths = pls_file.readlines()
+        for img_path in images_paths[2:]:
+            images_lst.append(main_path + img_path.replace("\n", ""))
+        pkl_file_path = main_path + images_paths[0].replace("\n", "")
+    controller = Controller(pkl_file_path, images_lst)
+    controller.run()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+main("../resources/play_list.pls")
